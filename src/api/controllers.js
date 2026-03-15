@@ -55,34 +55,59 @@ const logoutSession = async (req, res) => {
 
 // GET /api/messages — Semua pesan
 const getAllMessages = (req, res) => {
+  const limit = req.query.limit ? parseInt(req.query.limit) : null;
+  let data = wa.getMessages();
+  if (limit && !isNaN(limit) && limit > 0) {
+    data = data.slice(-limit);
+  }
+  
   res.status(200).json({
     success: true,
-    data: wa.getMessages()
+    data: data
   });
 };
 
 // GET /api/messages/private — Pesan pribadi saja
 const getPrivateMessages = (req, res) => {
+  const limit = req.query.limit ? parseInt(req.query.limit) : null;
+  let data = wa.getPrivateMessages();
+  if (limit && !isNaN(limit) && limit > 0) {
+    data = data.slice(-limit);
+  }
+
   res.status(200).json({
     success: true,
-    data: wa.getPrivateMessages()
+    data: data
   });
 };
 
 // GET /api/messages/group — Pesan grup saja
 const getGroupMessages = (req, res) => {
+  const limit = req.query.limit ? parseInt(req.query.limit) : null;
+  let data = wa.getGroupMessages();
+  if (limit && !isNaN(limit) && limit > 0) {
+    data = data.slice(-limit);
+  }
+
   res.status(200).json({
     success: true,
-    data: wa.getGroupMessages()
+    data: data
   });
 };
 
 // GET /api/messages/:number — Pesan dari nomor tertentu
 const getMessagesByNumber = (req, res) => {
   let searchNumber = req.params.number;
+  const limit = req.query.limit ? parseInt(req.query.limit) : null;
+  
+  let data = wa.getMessagesByNumber(searchNumber);
+  if (limit && !isNaN(limit) && limit > 0) {
+    data = data.slice(-limit); // ambil pesan terbaru sejumlah `limit`
+  }
+
   res.status(200).json({
     success: true,
-    data: wa.getMessagesByNumber(searchNumber)
+    data: data
   });
 };
 
