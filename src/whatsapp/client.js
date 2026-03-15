@@ -314,11 +314,16 @@ function getGroupMessages() {
   return messagesStorage.filter(msg => msg.isGroup);
 }
 
-function getMessagesByNumber(number) {
-  let searchNumber = number.replace('+', '');
+function getMessagesByNumber(query) {
+  const cleanQuery = query.toLowerCase();
+  let searchNumber = query.replace('+', '');
   searchNumber = formatNumber(searchNumber);
+  
   return messagesStorage.filter(
-    msg => msg.senderNumber === searchNumber || msg.senderNumber === number
+    msg => 
+      msg.senderNumber === searchNumber || 
+      msg.senderNumber === query ||
+      (msg.senderName && msg.senderName.toLowerCase().includes(cleanQuery))
   );
 }
 
