@@ -8,6 +8,7 @@ router.get('/session/status',  c.getStatus);
 router.post('/session/logout', c.logoutSession);
 
 // Mengambil pesan — sama seperti sebelumnya
+router.get('/api/contacts',          c.getContacts);
 router.get('/api/messages',          c.getAllMessages);
 router.get('/api/messages/private',  c.getPrivateMessages);
 router.get('/api/messages/group',    c.getGroupMessages);

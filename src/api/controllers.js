@@ -109,6 +109,14 @@ const sendMessage = async (req, res) => {
   }
 };
 
+// GET /api/contacts — Daftar kontak yang sudah tersinkronisasi
+const getContacts = (req, res) => {
+  res.status(200).json({
+    success: true,
+    data: wa.getContacts()
+  });
+};
+
 module.exports = { 
   startSession, 
   getStatus, 
@@ -118,4 +126,5 @@ module.exports = {
   getGroupMessages, 
   getMessagesByNumber, 
   sendMessage,
+  getContacts,
 };

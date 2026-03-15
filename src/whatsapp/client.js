@@ -387,6 +387,13 @@ async function logout() {
   }
 }
 
+function getContacts() {
+  return {
+    names: idToName,
+    lids: lidToPhone
+  };
+}
+
 module.exports = {
   connectToWhatsApp,
   getPairingCode,
@@ -396,5 +403,6 @@ module.exports = {
   getPrivateMessages,
   getGroupMessages,
   getMessagesByNumber,
+  getContacts,
   logout,
 };
